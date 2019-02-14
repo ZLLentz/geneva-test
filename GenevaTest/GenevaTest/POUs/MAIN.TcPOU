@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+  <POU Name="MAIN" Id="{1787a7c3-32d3-4fb2-9d8d-7da5ae36cf63}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbPower1: MC_POWER;
+	axis1: AXIS_REF;
+	fbPower2: MC_POWER;
+	axis2: AXIS_REF;
+	bLimFwd2 AT %I*: BOOL;
+	bLimBwd2 AT %I*: BOOL;
+	bBrake2 AT %Q*: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[axis1.ReadStatus();
+fbPower1(Axis:=axis1,
+	Enable:=TRUE,
+	Enable_Positive:=TRUE,
+	Enable_Negative:=TRUE);
+axis2.ReadStatus();
+fbPower2(Axis:=axis2,
+	Enable:=TRUE,
+	Enable_Positive:=bLimFwd2,
+	Enable_Negative:=bLimBwd2);
+bBrake2 := axis2.Status.ControlLoopClosed;]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="35" Count="0" />
+      <LineId Id="8" Count="2" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="22" Count="3" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

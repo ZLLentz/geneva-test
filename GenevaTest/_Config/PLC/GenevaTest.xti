@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4020.32" ClassName="CNestedPlcProjDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4022.22" ClassName="CNestedPlcProjDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{4C3FC5AC-D5AA-44C6-AC5A-159774BA0F6D}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
@@ -880,7 +880,7 @@ External Setpoint Generation:
 		</DataType>
 	</DataTypes>
 	<Project GUID="{51968187-C5B8-44E5-8CDF-0561BEF9426E}" Name="GenevaTest" PrjFilePath="..\..\GenevaTest\GenevaTest.plcproj" TmcFilePath="..\..\GenevaTest\GenevaTest.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
-		<Instance Id="#x01010010" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="GenevaTest\GenevaTest.tmc">
 			<Name>GenevaTest Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Vars VarGrpType="1">
@@ -991,6 +991,10 @@ External Setpoint Generation:
 						</Comment>
 					</SubVar>
 				</Var>
+				<Var>
+					<Name>MAIN.nRawCount</Name>
+					<Type>ULINT</Type>
+				</Var>
 			</Vars>
 			<Vars VarGrpType="2">
 				<Name>PlcTask Outputs</Name>
@@ -1007,8 +1011,15 @@ External Setpoint Generation:
 					<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 				</Var>
 			</Vars>
+			<UnrestoredVarLinks ImportTime="2019-02-20T10:06:21">
+				<OwnerA Name="InputDst" Prefix="TIPC^GenevaTest^GenevaTest Instance" Type="1">
+					<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 4 (EL5042)">
+						<Link VarA="MAIN.nRawCount" TypeA="LREAL" InOutA="0" GuidA="{18071995-0000-0000-0000-00000000000E}" VarB="FB Inputs Channel 2^Position" RestoreInfo="TypeMismatch" OldTypeA="LREAL" OldGuidA="{18071995-0000-0000-0000-00000000000E}" NewTypeA="ULINT" NewGuidA="{18071995-0000-0000-0000-00000000000B}"/>
+					</OwnerB>
+				</OwnerA>
+			</UnrestoredVarLinks>
 			<TaskPouOids>
-				<TaskPouOid Prio="20" OTCID="#x01010011"/>
+				<TaskPouOid Prio="20" OTCID="#x08502001"/>
 			</TaskPouOids>
 		</Instance>
 	</Project>
@@ -1017,6 +1028,9 @@ External Setpoint Generation:
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL7031)">
 				<Link VarA="PlcTask Inputs^MAIN.bLimBwd2" VarB="STM Status^Status^Digital input 2"/>
 				<Link VarA="PlcTask Inputs^MAIN.bLimFwd2" VarB="STM Status^Status^Digital input 1"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 4 (EL5042)">
+				<Link VarA="PlcTask Inputs^MAIN.nRawCount" VarB="FB Inputs Channel 2^Position"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 6 (EL2008)">
 				<Link VarA="PlcTask Outputs^MAIN.bBrake2" VarB="Channel 1^Output"/>
